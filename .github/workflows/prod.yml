@@ -1,0 +1,87 @@
+# @format
+
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Nft-Music Front CI Production
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [16.x]
+                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v2
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: 'npm'
+            - uses: webfactory/ssh-agent@v0.4.1
+              with:
+                  ssh-private-key: ${{ secrets.SSHKEY }}
+            - name: install
+              run: npm ci
+            - name: build
+              run: npm run build
+              env:
+                  CI: false
+            - name: Archive production artifacts
+              uses: actions/upload-artifact@v2
+              with:
+                  name: .next
+                  path: .next
+
+    deploy:
+        needs: [build]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/download-artifact@v2
+              with:
+                  name: .next
+                  path: .next
+
+            - name: Copy build to server
+              uses: appleboy/scp-action@master
+              env:
+                  HOST: ${{ secrets.HOST }}
+                  USERNAME: ${{ secrets.USERNAME }}
+                  PORT: ${{ secrets.PORT }}
+                  KEY: ${{ secrets.SSHKEY }}
+              with:
+                  source: .next/*
+                  target: /var/www/nft-music.co/nft-music-front-updated/
+
+            - name: SSH and deploy node app
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.SSHKEY }}
+                  port: ${{ secrets.PORT }}
+                  script: |
+                      cd /var/www/nft-music.co/nft-music-front-updated/
+                      git pull origin main
+                      npm install --production
+                      pm2 restart nft-music-frontend
+    cleanup_job:
+        needs: [deploy]
+        if: always()
+        runs-on: ubuntu-latest
+        steps:
+            - name: call webhook to delete artifacts
+              env:
+                  FOR_WEBHOOKS_SECRET: ${{ secrets.FOR_WEBHOOKS_SECRET }}
+              run: |
+                  echo "::add-mask::$FOR_WEBHOOKS_SECRET"
+                  curl --verbose --fail --show-error --location --request POST "https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches" --header "Authorization: token $FOR_WEBHOOKS_SECRET" --header 'Content-Type: application/json' --header 'Accept: application/vnd.github.everest-preview+json' --data-raw "{ \"event_type\": \"delete_all_artifacts\", \"client_payload\": {\"parent_runid\": \"$GITHUB_RUN_ID\", \"parent_repo\": \"$GITHUB_REPOSITORY\"} }"

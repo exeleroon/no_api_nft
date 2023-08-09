@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'Nunito';
+    src: url('../public/assets/Nunito/NunitoSans-Regular.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+html body {
+    font-family: 'Nunito', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+}
+
+.ant-select-item-option-content {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

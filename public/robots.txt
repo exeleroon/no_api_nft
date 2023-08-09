@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /terms-and-conditions
+Disallow: /privacy-policy
+Disallow: /my-profile
+Disallow: /my-profile/settings
+Disallow: /create-nft
+Disallow: /forgot-password
+Disallow: /reset-password/
