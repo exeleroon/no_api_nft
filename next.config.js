@@ -15,11 +15,11 @@ module.exports = withPlugins([withBundleAnalyzer], {
             'nft-music-server-images.s3.eu-central-1.amazonaws.com'
         ]
     },
-    env: {
-        domain: 'https://nft-music.co',
-        nftMarketPlaceAddress: '0x7ad079C218e41BeFf9B828543fb9D4226CFb0884',
-        nftContractAddress: '0xCb114b149A380040093e14043d137A11312537E1',
-    },
+    // env: {
+    //     domain: 'https://nft-music.co',
+    //     nftMarketPlaceAddress: '0x7ad079C218e41BeFf9B828543fb9D4226CFb0884',
+    //     nftContractAddress: '0xCb114b149A380040093e14043d137A11312537E1',
+    // },
     async redirects() {
         return [
             {

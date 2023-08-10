@@ -138,7 +138,7 @@ const FooterMenuCol = ({ title, items }) => {
         <FooterMenuColWrapper>
             <FooterMenuColTitle>{title}</FooterMenuColTitle>
             {items.map((item, i) => (
-                <FooterMenuColItem>
+                <FooterMenuColItem key={i}>
                     {item?.icon ? <Image src={item.icon.src} width={13} alt='Icon' height={13} /> : ''}{' '}
                     <Link href={item.link} key={i}>
                         <a style={{ color: 'white' }}>{item.text}</a>

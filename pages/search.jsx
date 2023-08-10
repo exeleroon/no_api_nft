@@ -27,7 +27,7 @@ function Search() {
                     content='Поиск музыкальных NFT - самый большой выбор аудио NFT. Поиск по названию записи, исполнителю, цене NFT и возможность купить NFT. Все это только на NFT Music'
                     key='description'
                 />
-                <meta property='keywords' name='keywords' content='поиск NFT, найти NFT, аудио NFT, музыкальные NFT' key='keywords' key='keywords' />
+                <meta property='keywords' name='keywords' content='поиск NFT, найти NFT, аудио NFT, музыкальные NFT' key='keywords' />
                 <link rel='canonical' href={url} />
             </Head>
             <SearchPage />

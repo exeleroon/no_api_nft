@@ -18,9 +18,9 @@ const FeaturedArtists = () => {
     const dispatch = useDispatch()
     const artists = useSelector(state => state.nft.topArtistsItems)
 
-    const setSearchByArtist = () => {
-        dispatch(searchByArtist(true))
-    }
+    // const setSearchByArtist = () => {
+    //     dispatch(searchByArtist(true))
+    // }
     const antIcon = <LoadingOutlined style={{ fontSize: 45, color: 'black' }} spin />
 
     return (
@@ -28,9 +28,9 @@ const FeaturedArtists = () => {
             <DefaultContainer>
                 <DefaultTitle>
                     Топ{' '}
-                    <Link href='/search'>
-                        <a onClick={setSearchByArtist}>исполнители</a>
-                    </Link>{' '}
+                    {/*<Link href='/search'>*/}
+                    {/*    <a onClick={setSearchByArtist}>исполнители</a>*/}
+                    {/*</Link>{' '}*/}
                     за последние 7 дней{' '}
                 </DefaultTitle>
                 <NotableItemsContainer>
@@ -38,7 +38,7 @@ const FeaturedArtists = () => {
                         {artists ? (
                             <>
                                 {artists?.map((artist, index) => (
-                                    <Link href={`/artist/${artist.username}`} passHref>
+                                    <Link key={index + 'head'} href={`/artist/${artist.username}`} passHref>
                                         <Col sm={24} md={8} style={{ width: '100%' }} key={index}>
                                             <ArtistItem>
                                                 <ArtistCounter>{index + 1}</ArtistCounter>

@@ -143,7 +143,7 @@ const MyProfileSettingsPage = () => {
 
     const handleImagePreview = async file => {
         if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj)
+            // file.preview = await getBase64(file.originFileObj)
         }
 
         setPreviewImage(file.url || file.preview)
@@ -161,7 +161,7 @@ const MyProfileSettingsPage = () => {
 
     const handleBackgroundPreview = async file => {
         if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj)
+            // file.preview = await getBase64(file.originFileObj)
         }
 
         setBackgroundPreviewImage(file.url || file.preview)
@@ -357,7 +357,7 @@ const MyProfileSettingsPage = () => {
                                 </a>
                             </Link>
                             {!allUserData?.wallet && (
-                                <StyledButton htmlType='button' loading={isDataFetching} loading={walletFormLoading} onClick={connectWalletOnClick}>
+                                <StyledButton htmlType='button' loading={isDataFetching} onClick={connectWalletOnClick}>
                                     Подключить кошелек
                                 </StyledButton>
                             )}

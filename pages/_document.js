@@ -33,8 +33,9 @@ class MyDocument extends Document {
         return (
             <Html lang="ru">
                 <Head>
-                    <link rel="alternate" hreflang="ru" href="https://nft-music.co" />
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MVEJ8M0M4Q"></script>
+                    <title></title>
+                    <link rel="alternate" hrefLang="ru" href="https://nft-music.co" />
+                    {/*<script async src="https://www.googletagmanager.com/gtag/js?id=G-MVEJ8M0M4Q"></script>*/}
                     <script dangerouslySetInnerHTML={{ __html: `window.dataLayer = window.dataLayer || []; 
                         function gtag(){dataLayer.push(arguments);} 
                         gtag('js', new Date()); 

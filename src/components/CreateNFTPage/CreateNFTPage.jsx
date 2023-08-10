@@ -411,8 +411,8 @@ const CreateNFTPage = () => {
                         <Form.Item name='token' rules={[{ required: true, message: 'Пожалуйста, выбериье токен!' }]} hasFeedback>
                             <StyledSelect loading={availableTokensLoading}>
                                 {availableTokens &&
-                                    availableTokens.map(e => (
-                                        <Option value={e.symbols}>
+                                    availableTokens.map((e, key) => (
+                                        <Option key={key} value={e.symbols}>
                                             <Image src={e.logo} height={26} width={26} alt='Token logo' style={{ marginRight: '5px' }} />
                                             {e.symbols}
                                         </Option>

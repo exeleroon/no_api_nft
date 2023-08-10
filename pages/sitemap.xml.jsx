@@ -7,7 +7,7 @@ const Sitemap = () => {
     return null
 }
 
-export const getServerSideProps = async ({ res }) => {
+export const getServerSideProps = ({res}) => {
     const staticPaths = fs
         .readdirSync('pages')
         .filter(staticPage => {
@@ -31,7 +31,7 @@ export const getServerSideProps = async ({ res }) => {
             return `${process.env.domain}${staticPagePath.slice(0, -4) === 'index' ? '' : `/${staticPagePath.slice(0, -4)}`}`
         })
 
-    const allNfts = await nftAPI.getAllItems()
+    const allNfts = nftAPI.getAllItems()
 
     const dynamicPathsNfts = allNfts.data.map(singleProduct => {
         return `${process.env.domain}/kypit-nft/${singleProduct.id}`

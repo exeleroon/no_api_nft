@@ -28,9 +28,9 @@ const Notable = () => {
                 <Row gutter={{ sm: 20 }}>
                     {popItems?.length > 0 ? (
                         <>
-                            {popItems.map(el => {
+                            {popItems.map((el, key) => {
                                 return (
-                                    <Col span={8}>
+                                    <Col key={key} span={8}>
                                         <CardItem el={el} colSpan={8} homepage />
                                     </Col>
                                 )

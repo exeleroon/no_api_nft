@@ -48,7 +48,7 @@ const HeaderAccountInfo = ({ userDataLoading }) => {
     ]
 
     return (
-        <Link href='#'>
+        <>
             {!userDataLoading ? (
                 <HeaderAccountWrapper>
                     <LoadingOutlined style={{ color: '#333', fontSize: '53px' }} />
@@ -60,7 +60,7 @@ const HeaderAccountInfo = ({ userDataLoading }) => {
                     </HeaderAccountWrapper>
                 </Dropdown>
             )}
-        </Link>
+        </>
     )
 }
 
